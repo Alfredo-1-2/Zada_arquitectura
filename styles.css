@@ -550,7 +550,7 @@ img {
     margin: 0 1.1rem 1rem;
 }
 
-/* HOVER PREMIUM 3D + ZOOM IMAGEN */
+/* HOVER PREMIUM 3D */
 .pro-item:hover {
     transform: translateY(-4px);
     box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
@@ -562,7 +562,7 @@ img {
 }
 
 /* ============================================================
-    LIGHTBOX PROYECTOS
+    LIGHTBOX PROYECTOS (CORREGIDO)
    ============================================================ */
 
 .lightbox {
@@ -576,7 +576,7 @@ img {
     backdrop-filter: blur(6px);
 }
 
-.lightbox.active {
+.lightbox.open {
     display: flex;
 }
 
@@ -598,13 +598,18 @@ img {
     top: 25px;
     right: 35px;
     font-size: 3rem;
-    color: white;
+    color: #ffffff;
     cursor: pointer;
     font-weight: 300;
+    transition: 0.25s ease;
+}
+
+.lightbox-close:hover {
+    transform: scale(1.15);
 }
 
 /* =======================================
-    BOTONES FLOTANTES (Instagram + WhatsApp)
+    BOTONES FLOTANTES (IG + WHATSAPP)
    ======================================= */
 
 .whatsapp-float,
@@ -614,7 +619,6 @@ img {
     width: 58px;
     height: 58px;
     border-radius: 50%;
-    background: #25D366;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -637,18 +641,18 @@ img {
 /* WhatsApp abajo */
 .whatsapp-float {
     bottom: 24px;
+    background: #25D366;
 }
 
 /* Instagram arriba */
 .instagram-float {
-    bottom: 98px; /* 24 + 58 + 16px de separación */
-    background: #E1306C; /* Color Instagram */
+    bottom: 98px;
+    background: #E1306C;
 }
 
 .instagram-float img {
     width: 30px;
 }
-
 
 /* ============================================================
     CONTACTO
