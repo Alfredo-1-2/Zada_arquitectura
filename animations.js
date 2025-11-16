@@ -1,25 +1,15 @@
-/* =======================================
-    ANIMACIONES ON SCROLL (Fade-In)
-======================================= */
-const faders = document.querySelectorAll('.fade-in');
+/* ============================================================
+    LOADER
+   ============================================================ */
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.querySelector(".loader").classList.add("loader-hidden");
+    }, 600);
+});
 
-const options = { threshold: 0.25 };
-
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-    });
-}, options);
-
-faders.forEach(fader => appearOnScroll.observe(fader));
-
-
-
-/* =======================================
+/* ============================================================
     MENÚ HAMBURGUESA ANIMADO
-======================================= */
+   ============================================================ */
 const toggleBtn = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.menu');
 
@@ -28,54 +18,57 @@ toggleBtn.addEventListener('click', () => {
     menu.classList.toggle('open');
 });
 
-/* Cerrar menú al tocar un link */
-document.querySelectorAll('.menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        menu.classList.remove('open');
-        toggleBtn.classList.remove('open');
+/* Cerrar al hacer click en un enlace */
+document.querySelectorAll(".menu a").forEach(link => {
+    link.addEventListener("click", () => {
+        toggleBtn.classList.remove("open");
+        menu.classList.remove("open");
     });
 });
 
+/* ============================================================
+    FADE-IN + BLUR (4A)
+   ============================================================ */
+const faders = document.querySelectorAll(".fade-section");
 
+const appearOptions = {
+    threshold: 0.28
+};
 
-/* =======================================
-    LOADER PREMIUM
-======================================= */
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        document.querySelector(".loader").classList.add("loader-hidden");
-    }, 600);
-});
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+    });
+}, appearOptions);
 
+faders.forEach(fader => appearOnScroll.observe(fader));
 
-
-/* =======================================
-    PARALLAX DEL HERO (Optimizado)
-======================================= */
+/* ============================================================
+    HERO PARALLAX SUAVE
+   ============================================================ */
 const heroBg = document.querySelector(".hero-bg");
 
 document.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 10;
-    const y = (e.clientY / window.innerHeight - 0.5) * 10;
-
+    let x = (e.clientX / window.innerWidth - 0.5) * 4;
+    let y = (e.clientY / window.innerHeight - 0.5) * 4;
     heroBg.style.transform = `scale(1.12) translate(${x}px, ${y}px)`;
 });
 
-
-
-/* =======================================
-    TARJETAS 3D (Servicios & Proyectos)
-======================================= */
+/* ============================================================
+    HOVER 3D (Servicios + Proyectos)
+   ============================================================ */
 function tiltCard(card) {
     card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        const rotateX = ((y - rect.height / 2) / 20) * -1;
-        const rotateY = (x - rect.width / 2) / 20;
+        const rotateX = ((y - rect.height / 2) / 18) * -1;
+        const rotateY = (x - rect.width / 2) / 18;
 
-        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
     });
 
     card.addEventListener("mouseleave", () => {
@@ -83,39 +76,47 @@ function tiltCard(card) {
     });
 }
 
-document.querySelectorAll(".service-card, .pro-item").forEach(tiltCard);
+document.querySelectorAll(".service-card, .pro-item, .m-item").forEach(tiltCard);
 
-
-
-/* =======================================
-    LIGHTBOX PARA PROYECTOS
-======================================= */
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightboxImg");
-const closeLightbox = document.getElementById("lightboxClose");
-
-/* Abrir imagen en pantalla completa */
-document.querySelectorAll(".pro-item").forEach(item => {
-    item.addEventListener("click", () => {
-        const imgSrc = item.getAttribute("data-img");
-        lightboxImg.src = imgSrc;
-        lightbox.classList.add("open");
-    });
-});
-
-/* Botón cerrar */
-closeLightbox.addEventListener("click", () => {
-    lightbox.classList.remove("open");
-});
-
-/* Cerrar tocando fuera de la imagen */
-lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-        lightbox.classList.remove("open");
+/* ============================================================
+    MASONRY GRID (2A) — Auto ajuste al cargar imágenes
+   ============================================================ */
+window.addEventListener("load", () => {
+    const masonry = document.querySelector(".masonry");
+    if (masonry) {
+        masonry.style.opacity = "1";
     }
 });
 
-/* Cerrar con tecla ESC */
-document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") lightbox.classList.remove("open");
+/* ============================================================
+    LIGHTBOX BLANCO ARQUITECTÓNICO (3C)
+   ============================================================ */
+const lightbox = document.createElement("div");
+lightbox.classList.add("lightbox");
+lightbox.innerHTML = `
+    <span class="close-lightbox">&times;</span>
+    <img id="lightbox-img" src="">
+    <div id="lightbox-title"></div>
+`;
+document.body.appendChild(lightbox);
+
+const lbImg = document.getElementById("lightbox-img");
+const lbTitle = document.getElementById("lightbox-title");
+
+document.querySelectorAll(".m-item img, .pro-img").forEach(img => {
+    img.addEventListener("click", () => {
+        lbImg.src = img.src || img.style.backgroundImage.slice(5, -2);
+        lbTitle.textContent = img.dataset.title || "";
+        lightbox.style.display = "flex";
+    });
+});
+
+document.querySelector(".close-lightbox").addEventListener("click", () => {
+    lightbox.style.display = "none";
+});
+
+lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+        lightbox.style.display = "none";
+    }
 });
