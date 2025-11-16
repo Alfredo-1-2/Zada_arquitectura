@@ -59,12 +59,12 @@
     <div class="hero-bg" style="background-image: url('imagen/IMG-20251114-WA0028.jpg');"></div>
 
     <div class="hero-content container">
-        <h1 class="hero-title">Diseñamos espacios que resuelven.</h1>
-        <p class="hero-sub">
+        <h1 class="hero-title hero-slide-left">Diseñamos espacios que resuelven.</h1>
+        <p class="hero-sub hero-slide-right">
             Arquitectura funcional, contemporánea y equilibrada para elevar cada proyecto.
         </p>
 
-        <div class="hero-buttons">
+        <div class="hero-buttons hero-slide-up">
             <a href="#proyectos" class="btn primary">Ver proyectos</a>
             <a href="#contacto" class="btn ghost">Iniciar proyecto</a>
         </div>
@@ -131,13 +131,14 @@
     </div>
 </section>
 
-<!-- PROYECTOS (Masonry + Lightbox) -->
+<!-- PROYECTOS -->
 <section id="proyectos" class="section fade-section">
     <div class="container">
         <h2 class="center">Proyectos</h2>
         <p class="section-sub center">Obras reales del estudio.</p>
 
         <div class="masonry">
+
             <div class="m-item">
                 <img src="imagen/IMG-20251114-WA0021.jpg" data-title="Proyecto 01 — Residencial" class="lb">
             </div>
@@ -179,6 +180,7 @@
 <!-- CONTACTO -->
 <section id="contacto" class="section alt fade-section">
     <div class="container contact-grid">
+        
         <div>
             <h2>Contacto</h2>
             <p class="section-sub">Te acompañamos en cada etapa.</p>
@@ -187,28 +189,16 @@
                 <p><strong>Estudio:</strong> ZADA ARQUITECTOS E.A.S.</p>
                 <p><strong>RUC:</strong> 80161542-9</p>
                 <p><strong>Email:</strong> 
-                    <a href="mailto:alfredocanetelopez1@gmail.com">alfredocanetelopez1@gmail.com</a>
+                    <a href="mailto:zadaarquitectos@gmail.com">zadaarquitectos@gmail.com</a>
+                </p>
+                <p><strong>WhatsApp:</strong>
+                    <a href="https://wa.me/595981711660" target="_blank">+595 981 711 660</a>
+                </p>
+                <p><strong>Instagram:</strong>
+                    <a href="https://instagram.com" target="_blank">@zada.arquitectos</a>
                 </p>
             </div>
         </div>
-
-        <!-- FORMULARIO REAL CON FORMSubmit -->
-        <form class="contact-form glass" 
-              action="https://formsubmit.co/alfredocanetelopez1@gmail.com" 
-              method="POST">
-
-            <input type="text" name="name" placeholder="Nombre completo" required>
-            <input type="email" name="email" placeholder="Correo electrónico" required>
-            <textarea name="message" rows="5" placeholder="Detalles del proyecto" required></textarea>
-
-            <!-- Configuración oculta -->
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_redirect" value="https://zada-arquitecturas.vercel.app/gracias.html">
-
-            <button type="submit" class="btn primary">Enviar mensaje</button>
-            <p class="form-note">*Formulario real. Los mensajes llegan directamente al correo.</p>
-        </form>
     </div>
 </section>
 
