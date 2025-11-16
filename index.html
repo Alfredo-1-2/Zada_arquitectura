@@ -111,10 +111,22 @@
         <p class="section-sub center">Soluciones arquitectónicas integrales.</p>
 
         <div class="grid">
-            <div class="service-card"> <h3>Arquitectura residencial</h3> <p>Viviendas modernas, eficientes y estéticas.</p></div>
-            <div class="service-card"> <h3>Arquitectura comercial</h3> <p>Locales con identidad y experiencia.</p></div>
-            <div class="service-card"> <h3>Arquitectura corporativa</h3> <p>Oficinas claras, productivas y modernas.</p></div>
-            <div class="service-card"> <h3>Dirección de obra</h3> <p>Supervisión técnica completa.</p></div>
+            <div class="service-card">
+                <h3>Arquitectura residencial</h3>
+                <p>Viviendas modernas, eficientes y estéticas.</p>
+            </div>
+            <div class="service-card">
+                <h3>Arquitectura comercial</h3>
+                <p>Locales con identidad y experiencia.</p>
+            </div>
+            <div class="service-card">
+                <h3>Arquitectura corporativa</h3>
+                <p>Oficinas claras, productivas y modernas.</p>
+            </div>
+            <div class="service-card">
+                <h3>Dirección de obra</h3>
+                <p>Supervisión técnica completa.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -126,8 +138,6 @@
         <p class="section-sub center">Obras reales del estudio.</p>
 
         <div class="masonry">
-
-            <!-- Cada item abre lightbox -->
             <div class="m-item">
                 <img src="imagen/IMG-20251114-WA0021.jpg" data-title="Proyecto 01 — Residencial" class="lb">
             </div>
@@ -155,7 +165,6 @@
             <div class="m-item">
                 <img src="imagen/IMG-20251114-WA0027.jpg" data-title="Proyecto 07 — Detalles" class="lb">
             </div>
-
         </div>
     </div>
 </section>
@@ -177,16 +186,28 @@
             <div class="contact-info">
                 <p><strong>Estudio:</strong> ZADA ARQUITECTOS E.A.S.</p>
                 <p><strong>RUC:</strong> 80161542-9</p>
-                <p><strong>Email:</strong> <a href="mailto:zadaarquitectos@gmail.com">zadaarquitectos@gmail.com</a></p>
+                <p><strong>Email:</strong> 
+                    <a href="mailto:alfredocanetelopez1@gmail.com">alfredocanetelopez1@gmail.com</a>
+                </p>
             </div>
         </div>
 
-        <form class="contact-form glass">
-            <input type="text" placeholder="Nombre completo">
-            <input type="email" placeholder="Correo electrónico">
-            <textarea rows="5" placeholder="Detalles del proyecto"></textarea>
-            <button type="button" class="btn primary">Enviar mensaje</button>
-            <p class="form-note">*Formulario demostrativo.</p>
+        <!-- FORMULARIO REAL CON FORMSubmit -->
+        <form class="contact-form glass" 
+              action="https://formsubmit.co/alfredocanetelopez1@gmail.com" 
+              method="POST">
+
+            <input type="text" name="name" placeholder="Nombre completo" required>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <textarea name="message" rows="5" placeholder="Detalles del proyecto" required></textarea>
+
+            <!-- Configuración oculta -->
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_redirect" value="https://zada-arquitecturas.vercel.app/gracias.html">
+
+            <button type="submit" class="btn primary">Enviar mensaje</button>
+            <p class="form-note">*Formulario real. Los mensajes llegan directamente al correo.</p>
         </form>
     </div>
 </section>
