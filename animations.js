@@ -1,14 +1,20 @@
 /* ============================================================
-    LOADER
+   LOADER + MASONRY INIT
    ============================================================ */
 window.addEventListener("load", () => {
+
+    // Ocultar loader
     setTimeout(() => {
         document.querySelector(".loader").classList.add("loader-hidden");
     }, 600);
+
+    // Mostrar masonry al cargar imágenes
+    const masonry = document.querySelector(".masonry");
+    if (masonry) masonry.style.opacity = "1";
 });
 
 /* ============================================================
-    MENÚ HAMBURGUESA ANIMADO
+   MENÚ HAMBURGUESA
    ============================================================ */
 const toggleBtn = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.menu');
@@ -18,7 +24,7 @@ toggleBtn.addEventListener('click', () => {
     menu.classList.toggle('open');
 });
 
-/* Cerrar al hacer click en un enlace */
+// Cerrar al hacer click en un enlace
 document.querySelectorAll(".menu a").forEach(link => {
     link.addEventListener("click", () => {
         toggleBtn.classList.remove("open");
@@ -27,13 +33,10 @@ document.querySelectorAll(".menu a").forEach(link => {
 });
 
 /* ============================================================
-    FADE-IN + BLUR (4A)
+   FADE + BLUR
    ============================================================ */
 const faders = document.querySelectorAll(".fade-section");
-
-const appearOptions = {
-    threshold: 0.28
-};
+const appearOptions = { threshold: 0.28 };
 
 const appearOnScroll = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -46,18 +49,18 @@ const appearOnScroll = new IntersectionObserver((entries, observer) => {
 faders.forEach(fader => appearOnScroll.observe(fader));
 
 /* ============================================================
-    HERO PARALLAX SUAVE
+   HERO PARALLAX SUAVE
    ============================================================ */
 const heroBg = document.querySelector(".hero-bg");
 
 document.addEventListener("mousemove", (e) => {
-    let x = (e.clientX / window.innerWidth - 0.5) * 4;
-    let y = (e.clientY / window.innerHeight - 0.5) * 4;
+    let x = (e.clientX / window.innerWidth - 0.5) * 3;
+    let y = (e.clientY / window.innerHeight - 0.5) * 3;
     heroBg.style.transform = `scale(1.12) translate(${x}px, ${y}px)`;
 });
 
 /* ============================================================
-    HOVER 3D (Servicios + Proyectos)
+   HOVER 3D (Servicios + Masonry)
    ============================================================ */
 function tiltCard(card) {
     card.addEventListener("mousemove", (e) => {
@@ -76,45 +79,31 @@ function tiltCard(card) {
     });
 }
 
-document.querySelectorAll(".service-card, .pro-item, .m-item").forEach(tiltCard);
+document.querySelectorAll(".service-card, .m-item").forEach(tiltCard);
 
 /* ============================================================
-    MASONRY GRID (2A) — Auto ajuste al cargar imágenes
+   LIGHTBOX PREMIUM
    ============================================================ */
-window.addEventListener("load", () => {
-    const masonry = document.querySelector(".masonry");
-    if (masonry) {
-        masonry.style.opacity = "1";
-    }
-});
-
-/* ============================================================
-    LIGHTBOX BLANCO ARQUITECTÓNICO (3C)
-   ============================================================ */
-const lightbox = document.createElement("div");
-lightbox.classList.add("lightbox");
-lightbox.innerHTML = `
-    <span class="close-lightbox">&times;</span>
-    <img id="lightbox-img" src="">
-    <div id="lightbox-title"></div>
-`;
-document.body.appendChild(lightbox);
-
+const lightbox = document.getElementById("lightbox");
 const lbImg = document.getElementById("lightbox-img");
 const lbTitle = document.getElementById("lightbox-title");
+const closeBtn = document.querySelector(".close-lightbox");
 
-document.querySelectorAll(".m-item img, .pro-img").forEach(img => {
+// Abrir
+document.querySelectorAll(".m-item img").forEach(img => {
     img.addEventListener("click", () => {
-        lbImg.src = img.src || img.style.backgroundImage.slice(5, -2);
+        lbImg.src = img.src;
         lbTitle.textContent = img.dataset.title || "";
         lightbox.style.display = "flex";
     });
 });
 
-document.querySelector(".close-lightbox").addEventListener("click", () => {
+// Cerrar botón
+closeBtn.addEventListener("click", () => {
     lightbox.style.display = "none";
 });
 
+// Cerrar haciendo click fuera
 lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) {
         lightbox.style.display = "none";
