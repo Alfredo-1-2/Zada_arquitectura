@@ -1,13 +1,12 @@
 /* ============================================================
-    PALETA ZADA — CYPRESS (VERSIÓN FINAL)
+   PALETA ZADA — CYPRESS (VERSIÓN 1 LIMPIA + FONDO OLIVE)
    ============================================================ */
-
 :root {
-    --cypress: #4C583E;
-    --olive: #768064;
-    --moss: #DADDD8;
-    --aleo: #959581;
-    --cedar: #2C3424;
+    --cypress: #4C583E;   /* Verde profundo arquitectónico */
+    --olive: #768064;     /* Fondo general */
+    --moss: #DADDD8;      /* Acentos claros */
+    --aleo: #959581;      /* Texto/acento suave */
+    --cedar: #2C3424;     /* Verde oscuro profundo */
 
     --text-light: #f5f7f4;
     --text-muted: #c7cec5;
@@ -15,16 +14,13 @@
     --btn-primary: #DADDD8;
     --btn-primary-text: #2C3424;
 
-    --btn-ghost-text: #f5f7f4;
-
-    --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.28);
-    --border-soft: rgba(255, 255, 255, 0.12);
+    --shadow-soft: 0 18px 45px rgba(0,0,0,0.28);
+    --border-soft: rgba(255,255,255,0.12);
 }
 
 /* ============================================================
-    BASE
+   BASE
    ============================================================ */
-
 *,
 *::before,
 *::after {
@@ -39,7 +35,7 @@ html {
 
 body {
     font-family: "Inter", sans-serif;
-    background: var(--cypress);
+    background: var(--olive);
     color: var(--text-light);
     line-height: 1.6;
 }
@@ -55,9 +51,8 @@ img {
 }
 
 /* ============================================================
-    LOADER PREMIUM
+   LOADER PREMIUM
    ============================================================ */
-
 .loader {
     position: fixed;
     inset: 0;
@@ -88,9 +83,8 @@ img {
 }
 
 /* ============================================================
-    NAVBAR
+   NAVBAR
    ============================================================ */
-
 .navbar {
     background: rgba(44, 52, 36, 0.92);
     backdrop-filter: blur(14px);
@@ -183,9 +177,8 @@ img {
 }
 
 /* ============================================================
-    MENÚ HAMBURGUESA ANIMADO
+   MENÚ HAMBURGUESA
    ============================================================ */
-
 .menu-toggle {
     display: none;
     width: 32px;
@@ -221,9 +214,8 @@ img {
 }
 
 /* ============================================================
-    BOTONES
+   BOTONES
    ============================================================ */
-
 .btn {
     display: inline-flex;
     align-items: center;
@@ -259,9 +251,8 @@ img {
 }
 
 /* ============================================================
-    HERO — Zoom + Parallax + Animaciones
+   HERO — Zoom + Parallax + Animaciones
    ============================================================ */
-
 .hero {
     position: relative;
     min-height: 75vh;
@@ -303,26 +294,11 @@ img {
     align-items: center;
 }
 
-.hero h1 {
-    font-family: "Montserrat", sans-serif;
-    font-size: clamp(2.4rem, 4vw, 3.4rem);
-    max-width: 650px;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    color: var(--text-light);
-}
-
 .hero p {
     max-width: 500px;
     font-size: 1rem;
     color: var(--text-muted);
     margin-bottom: 1.8rem;
-}
-
-.hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.9rem;
 }
 
 /* Animaciones del hero */
@@ -351,24 +327,24 @@ img {
 @keyframes heroUp { to {opacity:1; transform:translateY(0);} }
 
 /* ============================================================
-    FADE-IN SCROLL
+   FADE-IN SCROLL
    ============================================================ */
-
-.fade-in {
+.fade-section {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.9s ease, transform 1s ease;
+    filter: blur(7px);
+    transition: opacity 0.9s ease, transform 1s ease, filter 1s ease;
 }
 
-.fade-in.visible {
+.fade-section.visible {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
 }
 
 /* ============================================================
-    SECCIONES GENERALES
+   SECCIONES GENERALES
    ============================================================ */
-
 .section {
     padding: 5.5rem 0;
 }
@@ -387,9 +363,8 @@ img {
 }
 
 /* ============================================================
-    ESTUDIO
+   ESTUDIO
    ============================================================ */
-
 .two-columns {
     display: grid;
     grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
@@ -454,9 +429,8 @@ img {
 }
 
 /* ============================================================
-    SERVICIOS
+   SERVICIOS
    ============================================================ */
-
 .grid {
     display: grid;
     gap: 1.8rem;
@@ -501,70 +475,34 @@ img {
 }
 
 /* ============================================================
-    PROYECTOS
+   PROYECTOS
    ============================================================ */
-
-.pro-grid {
-    display: grid;
-    gap: 1.8rem;
-    margin-top: 1.8rem;
+.masonry {
+    columns: 3;
+    column-gap: 1.5rem;
 }
 
-@media (min-width: 720px) {
-    .pro-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+.m-item {
+    margin-bottom: 1.5rem;
+    break-inside: avoid;
 }
 
-.pro-item {
-    border-radius: 1.4rem;
-    overflow: hidden;
-    background: var(--moss);
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-    color: var(--cedar);
-    transform: translateY(0);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    transform-style: preserve-3d;
-    will-change: transform;
+.m-item img {
+    width: 100%;
+    border-radius: 1.2rem;
+    cursor: pointer;
+    transition: transform .35s ease, filter .35s ease;
+    filter: grayscale(25%);
 }
 
-.pro-img {
-    height: 220px;
-    background-size: cover;
-    background-position: center;
-    filter: grayscale(35%);
-    transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.pro-item h3 {
-    font-size: 1.05rem;
-    margin: 0.9rem 1.1rem 0.15rem;
-    color: var(--cedar);
-}
-
-.pro-item span {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--olive);
-    margin: 0 1.1rem 1rem;
-}
-
-/* HOVER PREMIUM 3D */
-.pro-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
-}
-
-.pro-item:hover .pro-img {
-    transform: scale(1.05);
+.m-item img:hover {
+    transform: scale(1.03);
     filter: grayscale(0%);
 }
 
 /* ============================================================
-    LIGHTBOX PROYECTOS (CORREGIDO)
+   LIGHTBOX PREMIUM (NEGRO)
    ============================================================ */
-
 .lightbox {
     position: fixed;
     inset: 0;
@@ -572,7 +510,8 @@ img {
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 99999;
+    flex-direction: column;
+    z-index: 3000;
     backdrop-filter: blur(6px);
 }
 
@@ -593,6 +532,13 @@ img {
     to { opacity:1; transform: scale(1); }
 }
 
+.lightbox-title {
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: var(--moss);
+    font-weight: 500;
+}
+
 .lightbox-close {
     position: absolute;
     top: 25px;
@@ -608,56 +554,9 @@ img {
     transform: scale(1.15);
 }
 
-/* =======================================
-    BOTONES FLOTANTES (IG + WHATSAPP)
-   ======================================= */
-
-.whatsapp-float,
-.instagram-float {
-    position: fixed;
-    right: 22px;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
-    z-index: 999;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.whatsapp-float img,
-.instagram-float img {
-    width: 32px;
-}
-
-.whatsapp-float:hover,
-.instagram-float:hover {
-    transform: scale(1.06);
-    box-shadow: 0 18px 36px rgba(0,0,0,0.45);
-}
-
-/* WhatsApp abajo */
-.whatsapp-float {
-    bottom: 24px;
-    background: #25D366;
-}
-
-/* Instagram arriba */
-.instagram-float {
-    bottom: 98px;
-    background: #E1306C;
-}
-
-.instagram-float img {
-    width: 30px;
-}
-
 /* ============================================================
-    CONTACTO
+   CONTACTO
    ============================================================ */
-
 .contact-grid {
     display: grid;
     gap: 2.8rem;
@@ -685,44 +584,9 @@ img {
     text-decoration: underline;
 }
 
-.contact-form {
-    border-radius: 1.4rem;
-    padding: 2rem 1.7rem;
-    background: var(--moss);
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 14px 35px rgba(0,0,0,0.4);
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    color: var(--cedar);
-}
-
-.contact-form input,
-.contact-form textarea {
-    border-radius: 0.9rem;
-    border: 1px solid rgba(0,0,0,0.14);
-    padding: 0.75rem 0.85rem;
-    font-size: 0.9rem;
-    background: #f6f7f3;
-    color: #222721;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    border-color: var(--olive);
-    box-shadow: 0 0 0 1px rgba(118,128,100,0.5);
-}
-
-.form-note {
-    font-size: 0.78rem;
-    color: #4a5147;
-}
-
 /* ============================================================
-    FOOTER PREMIUM
+   FOOTER PREMIUM
    ============================================================ */
-
 .footer {
     padding: 2.4rem 0 2.7rem;
     text-align: center;
@@ -734,9 +598,37 @@ img {
 }
 
 /* ============================================================
+    ICONOS FLOTANTES (Instagram + WhatsApp)
+   ============================================================ */
+.floating-icons {
+    position: fixed;
+    right: 22px;
+    bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 1600;
+}
+
+.floating-icons a img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.25);
+    padding: 6px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    transition: transform .25s ease;
+}
+
+.floating-icons a:hover img {
+    transform: scale(1.12);
+}
+
+
+/* ============================================================
     RESPONSIVE COMPLETO
    ============================================================ */
-
 @media (max-width: 880px) {
     .two-columns {
         grid-template-columns: 1fr;
@@ -780,15 +672,6 @@ img {
         padding: 3.6rem 0 3.4rem;
     }
 
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-
-    .hero-buttons {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
     .section {
         padding: 4.2rem 0;
     }
@@ -805,422 +688,4 @@ img {
     .contact-form {
         border-radius: 1.1rem;
     }
-}
-/* ============================================================
-    PALETA — ZADA Arquitectos (Cypress Premium)
-   ============================================================ */
-:root {
-    --cypress: #4C583E;
-    --olive: #768064;
-    --moss: #DADDD8;
-    --aleo: #959581;
-    --cedar: #2C3424;
-
-    --text-light: #f5f7f4;
-    --text-muted: #c7cec5;
-
-    --btn-primary: #DADDD8;
-    --btn-primary-text: #2C3424;
-
-    --shadow-soft: 0 25px 55px rgba(0,0,0,0.35);
-    --border-soft: rgba(255,255,255,0.12);
-}
-
-/* ============================================================
-    BASE
-   ============================================================ */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-    font-family: "Inter", sans-serif;
-    background: var(--cypress);
-    color: var(--text-light);
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-
-img { width: 100%; display: block; }
-
-.container {
-    width: min(1120px, 90%);
-    margin: auto;
-}
-
-/* ============================================================
-    LOADER
-   ============================================================ */
-.loader {
-    position: fixed;
-    inset: 0;
-    background: var(--cedar);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9998;
-}
-
-.loader-circle {
-    width: 65px;
-    height: 65px;
-    border: 5px solid rgba(218,221,216,0.25);
-    border-top-color: var(--moss);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.loader-hidden {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .6s ease, visibility .6s ease;
-}
-
-/* ============================================================
-    ICONOS FLOTANTES (Instagram + WhatsApp)
-   ============================================================ */
-.floating-icons {
-    position: fixed;
-    right: 22px;
-    bottom: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    z-index: 2000;
-}
-
-.floating-icons a img {
-    width: 48px;
-    height: 48px;
-    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.4));
-    transition: transform .25s ease;
-}
-
-.floating-icons a:hover img {
-    transform: scale(1.12);
-}
-
-/* ============================================================
-    NAVBAR
-   ============================================================ */
-.navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1100;
-    backdrop-filter: blur(16px);
-    background: rgba(44,52,36,0.9);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: .9rem 0;
-}
-
-.logo {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
-}
-
-.logo-main {
-    font-family: "Montserrat";
-    color: var(--moss);
-    letter-spacing: .38em;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 1rem;
-}
-
-.logo-sub {
-    font-size: .7rem;
-    color: var(--aleo);
-}
-
-.menu {
-    display: flex;
-    align-items: center;
-    gap: 1.8rem;
-}
-
-.menu a {
-    text-decoration: none;
-    color: var(--text-light);
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    font-size: .75rem;
-    position: relative;
-}
-
-.menu a::after {
-    content: "";
-    width: 0;
-    height: 1px;
-    background: var(--moss);
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    transition: width .25s ease;
-}
-
-.menu a:hover::after { width: 100%; }
-
-/* ============================================================
-    MENU HAMBURGUESA
-   ============================================================ */
-.menu-toggle {
-    display: none;
-    width: 32px;
-    height: 26px;
-    position: relative;
-    cursor: pointer;
-}
-
-.menu-toggle span {
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background: white;
-    border-radius: 4px;
-    left: 0;
-    transition: .35s ease;
-}
-
-.menu-toggle span:nth-child(1){ top:0; }
-.menu-toggle span:nth-child(2){ top:50%; transform:translateY(-50%); }
-.menu-toggle span:nth-child(3){ bottom:0; }
-
-.menu-toggle.open span:nth-child(1){
-    transform: translateY(11px) rotate(45deg);
-}
-.menu-toggle.open span:nth-child(2){ opacity: 0; }
-.menu-toggle.open span:nth-child(3){
-    transform: translateY(-11px) rotate(-45deg);
-}
-
-/* ============================================================
-    BOTONES
-   ============================================================ */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: .9rem 1.8rem;
-    border-radius: 999px;
-    font-size: .95rem;
-    cursor: pointer;
-    transition: .25s ease;
-    text-decoration: none;
-}
-
-.btn.primary {
-    background: var(--btn-primary);
-    color: var(--btn-primary-text);
-    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
-}
-
-.btn.primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 18px 32px rgba(0,0,0,0.55);
-}
-
-.btn.ghost {
-    border: 1px solid rgba(255,255,255,0.8);
-    color: white;
-}
-
-.btn.ghost:hover { background: rgba(255,255,255,0.1); }
-
-/* ============================================================
-    HERO ARCHITECT (5B)
-   ============================================================ */
-.hero {
-    position: relative;
-    min-height: 75vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-}
-
-.hero-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    filter: grayscale(15%);
-    transform: scale(1.08);
-    transition: transform 1.2s ease-out;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 5rem 0;
-}
-
-.hero-title {
-    font-family: "Montserrat";
-    font-size: clamp(2.4rem, 4vw, 3.3rem);
-    color: white;
-    margin-bottom: 1rem;
-    letter-spacing: .01em;
-}
-
-.hero-sub {
-    color: var(--text-muted);
-    font-size: 1rem;
-    max-width: 540px;
-    margin: auto;
-    margin-bottom: 2rem;
-}
-
-/* ============================================================
-    FADE + BLUR (4A)
-   ============================================================ */
-.fade-section {
-    opacity: 0;
-    transform: translateY(40px);
-    filter: blur(7px);
-    transition: opacity .9s ease, transform .9s ease, filter 1s ease;
-}
-
-.fade-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-}
-
-/* ============================================================
-    GLASS CARDS
-   ============================================================ */
-.glass {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.18);
-    backdrop-filter: blur(14px);
-}
-
-/* ============================================================
-    MASONRY GRID (2A)
-   ============================================================ */
-.masonry {
-    columns: 3;
-    column-gap: 1.5rem;
-}
-
-.m-item {
-    margin-bottom: 1.5rem;
-    break-inside: avoid;
-    position: relative;
-}
-
-.m-item img {
-    width: 100%;
-    border-radius: 1.2rem;
-    cursor: pointer;
-    transition: transform .35s ease, filter .35s ease;
-    filter: grayscale(25%);
-}
-
-.m-item img:hover {
-    transform: scale(1.03);
-    filter: grayscale(0%);
-}
-
-/* ============================================================
-    LIGHTBOX BLANCO (3C)
-   ============================================================ */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(255,255,255,0.9);
-    backdrop-filter: blur(9px);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 3000;
-}
-
-.lightbox img {
-    max-width: 90%;
-    max-height: 80vh;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-soft);
-}
-
-#lightbox-title {
-    font-size: 1rem;
-    margin-top: 1rem;
-    color: #2b2b2b;
-    font-weight: 500;
-}
-
-.close-lightbox {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 3rem;
-    cursor: pointer;
-    color: #222;
-    font-weight: 300;
-}
-
-/* ============================================================
-    CONTACTO
-   ============================================================ */
-.contact-grid {
-    display: grid;
-    gap: 2rem;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: .9rem;
-    border-radius: .9rem;
-    border: none;
-    background: rgba(255,255,255,0.85);
-    color: #222;
-}
-
-.contact-info p { margin-bottom: .4rem; }
-
-/* ============================================================
-    FOOTER
-   ============================================================ */
-.footer {
-    padding: 2.2rem;
-    text-align: center;
-    color: var(--text-muted);
-}
-
-/* ============================================================
-    RESPONSIVE
-   ============================================================ */
-@media (max-width: 980px){
-    .masonry { columns: 2; }
-}
-
-@media (max-width: 620px){
-    .masonry { columns: 1; }
-    .menu-toggle { display:block; }
-    .menu { 
-        display:none;
-        position:absolute;
-        top:100%;
-        right:15px;
-        flex-direction:column;
-        background:rgba(30,30,30,0.92);
-        padding:1rem;
-        border-radius:1rem;
-    }
-    .menu.open { display:flex; }
 }
