@@ -1,16 +1,10 @@
 /* ============================================================
-   LOADER + MASONRY INIT
+   LOADER
    ============================================================ */
 window.addEventListener("load", () => {
-
-    // Ocultar loader
     setTimeout(() => {
         document.querySelector(".loader").classList.add("loader-hidden");
     }, 600);
-
-    // Mostrar masonry al cargar imágenes
-    const masonry = document.querySelector(".masonry");
-    if (masonry) masonry.style.opacity = "1";
 });
 
 /* ============================================================
@@ -24,7 +18,6 @@ toggleBtn.addEventListener('click', () => {
     menu.classList.toggle('open');
 });
 
-// Cerrar al hacer click en un enlace
 document.querySelectorAll(".menu a").forEach(link => {
     link.addEventListener("click", () => {
         toggleBtn.classList.remove("open");
@@ -36,31 +29,29 @@ document.querySelectorAll(".menu a").forEach(link => {
    FADE + BLUR
    ============================================================ */
 const faders = document.querySelectorAll(".fade-section");
-const appearOptions = { threshold: 0.28 };
-
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+        }
     });
-}, appearOptions);
+}, { threshold: 0.28 });
 
-faders.forEach(fader => appearOnScroll.observe(fader));
+faders.forEach(f => observer.observe(f));
 
 /* ============================================================
-   HERO PARALLAX SUAVE
+   PARALLAX HERO
    ============================================================ */
 const heroBg = document.querySelector(".hero-bg");
-
-document.addEventListener("mousemove", (e) => {
+document.addEventListener("mousemove", e => {
     let x = (e.clientX / window.innerWidth - 0.5) * 3;
     let y = (e.clientY / window.innerHeight - 0.5) * 3;
     heroBg.style.transform = `scale(1.12) translate(${x}px, ${y}px)`;
 });
 
 /* ============================================================
-   HOVER 3D (Servicios + Masonry)
+   HOVER 3D
    ============================================================ */
 function tiltCard(card) {
     card.addEventListener("mousemove", (e) => {
@@ -68,8 +59,8 @@ function tiltCard(card) {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        const rotateX = ((y - rect.height / 2) / 18) * -1;
-        const rotateY = (x - rect.width / 2) / 18;
+        let rotateX = ((y - rect.height / 2) / 18) * -1;
+        let rotateY = (x - rect.width / 2) / 18;
 
         card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
     });
@@ -82,30 +73,27 @@ function tiltCard(card) {
 document.querySelectorAll(".service-card, .m-item").forEach(tiltCard);
 
 /* ============================================================
-   LIGHTBOX PREMIUM
+   LIGHTBOX PREMIUM (CORREGIDO)
    ============================================================ */
 const lightbox = document.getElementById("lightbox");
-const lbImg = document.getElementById("lightbox-img");
-const lbTitle = document.getElementById("lightbox-title");
-const closeBtn = document.querySelector(".close-lightbox");
+const lbImg = document.querySelector(".lightbox-img");
+const lbTitle = document.querySelector(".lightbox-title");
+const closeBtn = document.querySelector(".lightbox-close");
 
-// Abrir
 document.querySelectorAll(".m-item img").forEach(img => {
     img.addEventListener("click", () => {
         lbImg.src = img.src;
         lbTitle.textContent = img.dataset.title || "";
-        lightbox.style.display = "flex";
+        lightbox.classList.add("open");
     });
 });
 
-// Cerrar botón
 closeBtn.addEventListener("click", () => {
-    lightbox.style.display = "none";
+    lightbox.classList.remove("open");
 });
 
-// Cerrar haciendo click fuera
 lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) {
-        lightbox.style.display = "none";
+        lightbox.classList.remove("open");
     }
 });
