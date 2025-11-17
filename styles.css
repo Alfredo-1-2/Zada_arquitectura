@@ -625,6 +625,19 @@ img {
     transform: scale(1.12);
 }
 
+/* Fotos de proyectos en una columna en celulares */
+@media (max-width: 720px) {
+    .masonry {
+        columns: 1 !important;
+        column-gap: 1.2rem;
+    }
+
+    .m-item {
+        break-inside: avoid;
+        margin-bottom: 1.5rem;
+    }
+}
+
 
 /* ============================================================
     RESPONSIVE COMPLETO
