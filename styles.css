@@ -1,12 +1,15 @@
 /* ============================================================
-   PALETA ZADA — CYPRESS (VERSIÓN 1 LIMPIA + FONDO OLIVE)
+   PALETA ZADA — CYPRESS
    ============================================================ */
 :root {
     --cypress: #4C583E;   /* Verde profundo arquitectónico */
-    --olive: #768064;     /* Fondo general */
+    --olive: #768064;     /* Acento verde medio */
     --moss: #DADDD8;      /* Acentos claros */
     --aleo: #959581;      /* Texto/acento suave */
+    --aleo-soft: #b9b9a7; /* Aleo más claro, legible sobre fondos oscuros */
     --cedar: #2C3424;     /* Verde oscuro profundo */
+
+    --bg: var(--cypress); /* Fondo general. Antes era --olive (contraste insuficiente: 2.6:1). Con cypress pasa a 4.7:1 */
 
     --text-light: #f5f7f4;
     --text-muted: #c7cec5;
@@ -31,11 +34,12 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem; /* el menú fijo no tapa el título al navegar */
 }
 
 body {
-    font-family: "Inter", sans-serif;
-    background: var(--olive);
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--bg);
     color: var(--text-light);
     line-height: 1.6;
 }
@@ -50,8 +54,30 @@ img {
     margin: 0 auto;
 }
 
+:focus-visible {
+    outline: 2px solid var(--moss);
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    background: var(--moss);
+    color: var(--cedar);
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    z-index: 5000;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
 /* ============================================================
-   LOADER PREMIUM
+   LOADER
    ============================================================ */
 .loader {
     position: fixed;
@@ -62,6 +88,10 @@ img {
     justify-content: center;
     z-index: 9999;
     transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.no-js .loader {
+    display: none;
 }
 
 .loader-circle {
@@ -80,6 +110,7 @@ img {
 .loader-hidden {
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
 }
 
 /* ============================================================
@@ -88,6 +119,7 @@ img {
 .navbar {
     background: rgba(44, 52, 36, 0.92);
     backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(255,255,255,0.1);
     position: sticky;
     top: 0;
@@ -106,9 +138,9 @@ img {
     display: flex;
     flex-direction: column;
     line-height: 1.1;
+    text-decoration: none;
 }
 
-/* ⭐ ANIMACIÓN DE LOGO */
 .logo-main {
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
@@ -116,25 +148,20 @@ img {
     text-transform: uppercase;
     font-size: 0.95rem;
     color: var(--moss);
+    /* Solo se anima el brillo (antes también animaba letter-spacing, lo que obligaba al navegador a recalcular el layout sin parar) */
     animation: logoGlow 3.2s ease-in-out infinite alternate;
 }
 
 @keyframes logoGlow {
-    0% {
-        letter-spacing: 0.33em;
-        text-shadow: 0 0 0px rgba(218,221,216,0);
-    }
-    100% {
-        letter-spacing: 0.37em;
-        text-shadow: 0 0 10px rgba(218,221,216,0.6);
-    }
+    0%   { text-shadow: 0 0 0 rgba(218,221,216,0); }
+    100% { text-shadow: 0 0 10px rgba(218,221,216,0.6); }
 }
 
 .logo-sub {
     font-size: 0.7rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--aleo);
+    color: var(--aleo-soft);
     margin-top: 0.25rem;
 }
 
@@ -166,7 +193,8 @@ img {
     transition: width 0.25s ease;
 }
 
-.menu a:hover::after {
+.menu a:hover::after,
+.menu a[aria-current="true"]::after {
     width: 100%;
 }
 
@@ -174,6 +202,16 @@ img {
     padding: 0.4rem 1.1rem;
     border-radius: 999px;
     border: 1px solid rgba(218,221,216,0.7);
+    transition: background 0.25s ease;
+}
+
+.btn-nav::after {
+    display: none;
+}
+
+.btn-nav:hover,
+.btn-nav[aria-current="true"] {
+    background: rgba(218,221,216,0.14);
 }
 
 /* ============================================================
@@ -185,6 +223,8 @@ img {
     height: 26px;
     cursor: pointer;
     position: relative;
+    background: none;
+    border: 0;
 }
 
 .menu-toggle span {
@@ -224,6 +264,7 @@ img {
     border-radius: 999px;
     border: 1px solid transparent;
     font-size: 0.95rem;
+    text-decoration: none;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -243,7 +284,7 @@ img {
 .btn.ghost {
     background: transparent;
     border: 1px solid rgba(245,247,244,0.8);
-    color: var(--btn-ghost-text);
+    color: var(--text-light);
 }
 
 .btn.ghost:hover {
@@ -256,6 +297,7 @@ img {
 .hero {
     position: relative;
     min-height: 75vh;
+    min-height: 75svh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -266,48 +308,53 @@ img {
 .hero-bg {
     position: absolute;
     inset: 0;
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
     filter: grayscale(20%);
     animation: heroZoom 12s ease-in-out infinite alternate;
     will-change: transform;
+    /* El parallax del mouse usa la propiedad "translate" (independiente de "transform"),
+       así no choca con la animación de zoom. */
+    translate: var(--px, 0px) var(--py, 0px);
+    transition: translate 0.25s ease-out;
 }
 
 @keyframes heroZoom {
-    0% { transform: scale(1.03); }
-    100% { transform: scale(1.12); }
+    0%   { transform: scale(1.06); }
+    100% { transform: scale(1.14); }
 }
 
+/* Capa oscura: ahora sí queda ENCIMA de la foto (z-index) para dar contraste al texto */
 .hero::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(0,0,0,0.35), rgba(0,0,0,0.10));
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2));
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     padding: 4.5rem 0 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.hero p {
-    max-width: 500px;
-    font-size: 1rem;
-    color: var(--text-muted);
-    margin-bottom: 1.8rem;
+.hero-sub {
+    max-width: 34rem;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text-light);
+    text-shadow: 0 2px 14px rgba(0,0,0,0.45);
 }
 
-/* Animaciones del hero */
-.hero-slide-left {
-    opacity: 0;
-    transform: translateX(-60px);
-    animation: heroLeft 1s ease forwards;
-}
-
+/* Animación de entrada del hero */
 .hero-slide-right {
     opacity: 0;
     transform: translateX(60px);
@@ -315,31 +362,21 @@ img {
     animation-delay: 0.25s;
 }
 
-.hero-slide-up {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: heroUp 1s ease forwards;
-    animation-delay: 0.45s;
-}
-
-@keyframes heroLeft { to {opacity:1; transform:translateX(0);} }
-@keyframes heroRight { to {opacity:1; transform:translateX(0);} }
-@keyframes heroUp { to {opacity:1; transform:translateY(0);} }
+@keyframes heroRight { to { opacity: 1; transform: translateX(0); } }
 
 /* ============================================================
    FADE-IN SCROLL
+   (solo si hay JavaScript; sin JS el contenido se ve igual)
    ============================================================ */
-.fade-section {
+.js .fade-section {
     opacity: 0;
-    transform: translateY(40px);
-    filter: blur(7px);
-    transition: opacity 0.9s ease, transform 1s ease, filter 1s ease;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.9s ease;
 }
 
-.fade-section.visible {
+.js .fade-section.visible {
     opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+    transform: none;
 }
 
 /* ============================================================
@@ -351,7 +388,6 @@ img {
 
 .section.alt {
     background: rgba(34,40,30,0.8);
-    backdrop-filter: blur(10px);
 }
 
 .center { text-align: center; }
@@ -399,7 +435,7 @@ img {
     border-radius: 999px;
     border: 1px solid rgba(218,221,216,0.7);
     color: var(--text-light);
-    background: rgba(76,88,62,0.35);
+    background: rgba(44,52,36,0.45);
 }
 
 .studio-card {
@@ -411,9 +447,11 @@ img {
 }
 
 .studio-card .tag {
+    display: inline-block;
     font-size: 0.75rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--aleo);
+    color: var(--aleo-soft);
     margin-bottom: 0.6rem;
 }
 
@@ -434,6 +472,7 @@ img {
 .grid {
     display: grid;
     gap: 1.8rem;
+    margin-top: 2.2rem;
 }
 
 #servicios h2 {
@@ -451,9 +490,9 @@ img {
     color: var(--cedar);
 }
 
-/* HOVER 3D */
-.service-card {
-    transform-style: preserve-3d;
+/* HOVER 3D (el movimiento lo calcula animations.js) */
+.service-card,
+.m-item {
     transition: transform .25s ease, box-shadow .25s ease;
     will-change: transform;
 }
@@ -468,18 +507,27 @@ img {
     color: #363b32;
 }
 
-@media (min-width: 720px) {
-    .grid {
-        grid-template-columns: repeat(4,1fr);
-    }
+@media (min-width: 560px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 960px) {
+    .grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* ============================================================
    PROYECTOS
    ============================================================ */
+#proyectos h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.7rem;
+    color: var(--moss);
+}
+
 .masonry {
     columns: 3;
     column-gap: 1.5rem;
+    margin-top: 2.2rem;
 }
 
 .m-item {
@@ -487,49 +535,79 @@ img {
     break-inside: avoid;
 }
 
+.m-btn {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    border-radius: 1.2rem;
+}
+
 .m-item img {
     width: 100%;
+    height: auto;
     border-radius: 1.2rem;
-    cursor: pointer;
     transition: transform .35s ease, filter .35s ease;
     filter: grayscale(25%);
 }
 
-.m-item img:hover {
+.m-item img:hover,
+.m-btn:focus-visible img {
     transform: scale(1.03);
     filter: grayscale(0%);
 }
 
+@media (max-width: 960px) {
+    .masonry { columns: 2; }
+}
+
+@media (max-width: 560px) {
+    .masonry { columns: 1; }
+}
+
 /* ============================================================
-   LIGHTBOX PREMIUM (NEGRO)
+   LIGHTBOX
    ============================================================ */
 .lightbox {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.82);
+    background: rgba(0,0,0,0.86);
     display: none;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     z-index: 3000;
+    padding: 1rem;
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .lightbox.open {
     display: flex;
 }
 
+.lightbox-figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: min(90vw, 1200px);
+}
+
 .lightbox-img {
-    max-width: 90%;
-    max-height: 85%;
+    max-width: 100%;
+    max-height: 78vh;
+    max-height: 78dvh;
+    object-fit: contain;
     border-radius: 1rem;
     box-shadow: 0 25px 50px rgba(0,0,0,0.45);
     animation: fadeZoom .35s ease;
 }
 
 @keyframes fadeZoom {
-    from { opacity:0; transform: scale(.85); }
-    to { opacity:1; transform: scale(1); }
+    from { opacity: 0; transform: scale(.9); }
+    to   { opacity: 1; transform: scale(1); }
 }
 
 .lightbox-title {
@@ -537,22 +615,49 @@ img {
     margin-top: 1rem;
     color: var(--moss);
     font-weight: 500;
+    text-align: center;
 }
 
 .lightbox-close {
     position: absolute;
-    top: 25px;
-    right: 35px;
+    top: 14px;
+    right: 22px;
     font-size: 3rem;
+    line-height: 1;
     color: #ffffff;
+    background: none;
+    border: 0;
     cursor: pointer;
-    font-weight: 300;
-    transition: 0.25s ease;
+    transition: transform .25s ease;
 }
 
 .lightbox-close:hover {
     transform: scale(1.15);
 }
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(0,0,0,0.35);
+    color: #fff;
+    font-size: 1.9rem;
+    line-height: 1;
+    padding-bottom: 4px;
+    cursor: pointer;
+    transition: background .2s ease;
+}
+
+.lightbox-nav:hover {
+    background: rgba(255,255,255,0.18);
+}
+
+.lightbox-nav.prev { left: 16px; }
+.lightbox-nav.next { right: 16px; }
 
 /* ============================================================
    CONTACTO
@@ -563,10 +668,20 @@ img {
     align-items: flex-start;
 }
 
+#contacto h2 {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.7rem;
+    color: var(--moss);
+}
+
 @media (min-width: 720px) {
     .contact-grid {
         grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
     }
+}
+
+.contact-info {
+    margin-top: 1.2rem;
 }
 
 .contact-info p {
@@ -584,8 +699,12 @@ img {
     text-decoration: underline;
 }
 
+.contact-cta {
+    margin-top: 1.6rem;
+}
+
 /* ============================================================
-   FOOTER PREMIUM
+   FOOTER
    ============================================================ */
 .footer {
     padding: 2.4rem 0 2.7rem;
@@ -593,12 +712,11 @@ img {
     font-size: 0.9rem;
     color: var(--text-muted);
     background: rgba(38,44,33,0.65);
-    backdrop-filter: blur(8px);
     border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 /* ============================================================
-    ICONOS FLOTANTES (Instagram + WhatsApp)
+   ICONOS FLOTANTES (Instagram + WhatsApp)
    ============================================================ */
 .floating-icons {
     position: fixed;
@@ -617,6 +735,7 @@ img {
     background: rgba(0,0,0,0.25);
     padding: 6px;
     backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     box-shadow: 0 12px 28px rgba(0,0,0,0.35);
     transition: transform .25s ease;
 }
@@ -625,22 +744,8 @@ img {
     transform: scale(1.12);
 }
 
-/* Fotos de proyectos en una columna en celulares */
-@media (max-width: 720px) {
-    .masonry {
-        columns: 1 !important;
-        column-gap: 1.2rem;
-    }
-
-    .m-item {
-        break-inside: avoid;
-        margin-bottom: 1.5rem;
-    }
-}
-
-
 /* ============================================================
-    RESPONSIVE COMPLETO
+   RESPONSIVE
    ============================================================ */
 @media (max-width: 880px) {
     .two-columns {
@@ -649,6 +754,7 @@ img {
 
     .hero {
         min-height: 60vh;
+        min-height: 60svh;
     }
 }
 
@@ -677,6 +783,14 @@ img {
         display: flex;
     }
 
+    .menu a {
+        padding: 0.3rem 0;
+    }
+
+    .menu .btn-nav {
+        padding: 0.4rem 1.1rem;
+    }
+
     .menu-toggle {
         display: block;
     }
@@ -688,6 +802,12 @@ img {
     .section {
         padding: 4.2rem 0;
     }
+
+    .lightbox-nav {
+        top: auto;
+        bottom: 18px;
+        transform: none;
+    }
 }
 
 @media (max-width: 480px) {
@@ -696,9 +816,28 @@ img {
     }
 
     .studio-card,
-    .service-card,
-    .pro-item,
-    .contact-form {
+    .service-card {
         border-radius: 1.1rem;
+    }
+}
+
+/* ============================================================
+   ACCESIBILIDAD — personas que piden menos movimiento
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0s !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .js .fade-section {
+        opacity: 1;
+        transform: none;
     }
 }
