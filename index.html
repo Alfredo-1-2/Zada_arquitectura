@@ -1,43 +1,79 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZADA Arquitectos</title>
+    <title>ZADA Arquitectos | Arquitectura residencial, comercial y corporativa</title>
+    <meta name="description" content="ZADA Arquitectos: estudio de arquitectura funcional, contemporánea y equilibrada. Proyectos residenciales, comerciales y corporativos, y dirección de obra.">
+    <meta name="theme-color" content="#2C3424">
 
-    <!-- Tipografías -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Redes sociales (al compartir el link en WhatsApp, Facebook, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_PY">
+    <meta property="og:title" content="ZADA Arquitectos">
+    <meta property="og:description" content="Arquitectura funcional, contemporánea y equilibrada para elevar cada proyecto.">
+    <!-- PENDIENTE: cuando tengas el dominio, agregá estas dos líneas con la URL completa:
+    <meta property="og:url" content="https://TU-DOMINIO.com/">
+    <meta property="og:image" content="https://TU-DOMINIO.com/imagen/IMG-20251114-WA0028.jpg">
+    -->
+
+    <!-- Ícono de pestaña (inline, no necesita archivo) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%232C3424'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Montserrat,Arial,sans-serif' font-weight='700' text-anchor='middle' fill='%23DADDD8'%3EZ%3C/text%3E%3C/svg%3E">
+
+    <!-- Tipografías (solo los pesos que se usan) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+    <!-- Si el JS no carga, el sitio sigue siendo visible -->
+    <script>document.documentElement.classList.replace('no-js', 'js');</script>
 
     <!-- Estilos -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Datos estructurados para Google -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "ZADA Arquitectos",
+        "description": "Estudio de arquitectura residencial, comercial y corporativa, con dirección de obra.",
+        "email": "zadaarquitectos@gmail.com",
+        "sameAs": ["https://instagram.com/zada.arquitectos"],
+        "address": { "@type": "PostalAddress", "addressCountry": "PY" }
+    }
+    </script>
 </head>
 <body>
 
+<a class="skip-link" href="#main">Saltar al contenido</a>
+
 <!-- LOADER -->
-<div class="loader">
+<div class="loader" aria-hidden="true">
     <div class="loader-circle"></div>
 </div>
 
-<!-- ICONOS FLOTANTES CORREGIDOS -->
+<!-- ICONOS FLOTANTES -->
 <div class="floating-icons">
-    <a href="https://instagram.com" target="_blank">
-        <img src="imagen/instagram.png" alt="Instagram">
+    <a href="https://instagram.com/zada.arquitectos" target="_blank" rel="noopener noreferrer" aria-label="Instagram de ZADA Arquitectos">
+        <img src="imagen/instagram.png" alt="" width="48" height="48">
     </a>
 
-    <a href="https://wa.me/595981711660" target="_blank">
-        <img src="imagen/icons8-whatsapp-96.png" alt="WhatsApp">
+    <!-- REVISAR: este número (…981 711 660) es distinto al de la sección Contacto (…985 828 588) -->
+    <a href="https://wa.me/595981711660?text=Hola%2C%20quisiera%20consultar%20por%20un%20proyecto" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
+        <img src="imagen/icons8-whatsapp-96.png" alt="" width="48" height="48">
     </a>
 </div>
 
 <!-- NAVBAR -->
 <header class="navbar">
     <div class="container nav-content">
-        <div class="logo">
+        <a class="logo" href="#inicio" aria-label="ZADA Arquitectos, ir al inicio">
             <span class="logo-main">ZADA</span>
-            <span class="logo-sub">ARQUITECTOS </span>
-        </div>
+            <span class="logo-sub">ARQUITECTOS</span>
+        </a>
 
-        <nav class="menu">
+        <nav class="menu" id="menu" aria-label="Principal">
             <a href="#inicio">Inicio</a>
             <a href="#estudio">Estudio</a>
             <a href="#servicios">Servicios</a>
@@ -45,20 +81,22 @@
             <a href="#contacto" class="btn-nav">Contacto</a>
         </nav>
 
-        <div class="menu-toggle">
+        <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
             <span></span><span></span><span></span>
-        </div>
+        </button>
     </div>
 </header>
 
+<main id="main">
+
 <!-- HERO -->
 <section id="inicio" class="hero">
-    <div class="hero-bg" style="background-image: url('imagen/IMG-20251114-WA0028.jpg');"></div>
+    <img class="hero-bg" src="imagen/IMG-20251114-WA0028.jpg" alt="" fetchpriority="high" decoding="async">
 
     <div class="hero-content container">
-        <p class="hero-sub hero-slide-right">
+        <h1 class="hero-sub hero-slide-right">
             Arquitectura funcional, contemporánea y equilibrada para elevar cada proyecto.
-        </p>
+        </h1>
     </div>
 </section>
 
@@ -80,7 +118,7 @@
         </div>
 
         <div class="col">
-            <div class="studio-card glass">
+            <div class="studio-card">
                 <span class="tag">Nuestro sello</span>
                 <h3>Arquitectura limpia, humana y moderna.</h3>
                 <p>Diseños con sentido técnico y visual, pensados para perdurar.</p>
@@ -125,69 +163,93 @@
         <div class="masonry">
 
             <div class="m-item">
-                <img src="imagen/IMG-20251114-WA0021.jpg" data-title="Proyecto 01 — Residencial" class="lb">
+                <button class="m-btn" type="button" data-title="Proyecto 01 — Residencial" aria-label="Ampliar Proyecto 01 — Residencial">
+                    <img src="imagen/IMG-20251114-WA0021.jpg" alt="Proyecto 01 — Residencial" loading="lazy" decoding="async">
+                </button>
             </div>
 
             <div class="m-item">
-                <img src="imagen/IMG-20251114-WA0022.jpg" data-title="Proyecto 02 — Comercial" class="lb">
+                <button class="m-btn" type="button" data-title="Proyecto 02 — Comercial" aria-label="Ampliar Proyecto 02 — Comercial">
+                    <img src="imagen/IMG-20251114-WA0022.jpg" alt="Proyecto 02 — Comercial" loading="lazy" decoding="async">
+                </button>
             </div>
 
             <div class="m-item">
-                <img src="imagen/IMG-20251114-WA0023.jpg" data-title="Proyecto 03 — Residencial" class="lb">
+                <button class="m-btn" type="button" data-title="Proyecto 03 — Residencial" aria-label="Ampliar Proyecto 03 — Residencial">
+                    <img src="imagen/IMG-20251114-WA0023.jpg" alt="Proyecto 03 — Residencial" loading="lazy" decoding="async">
+                </button>
             </div>
 
             <div class="m-item">
-                <img src="imagen/IMG-20251114-WA0024.jpg" data-title="Proyecto 04 — Residencial" class="lb">
+                <button class="m-btn" type="button" data-title="Proyecto 04 — Residencial" aria-label="Ampliar Proyecto 04 — Residencial">
+                    <img src="imagen/IMG-20251114-WA0024.jpg" alt="Proyecto 04 — Residencial" loading="lazy" decoding="async">
+                </button>
             </div>
 
             <div class="m-item">
-                <img src="imagen/IMG-20251114-WA0025.jpg" data-title="Proyecto 05 — Remodelación" class="lb">
+                <button class="m-btn" type="button" data-title="Proyecto 05 — Remodelación" aria-label="Ampliar Proyecto 05 — Remodelación">
+                    <img src="imagen/IMG-20251114-WA0025.jpg" alt="Proyecto 05 — Remodelación" loading="lazy" decoding="async">
+                </button>
             </div>
 
             <div class="m-item">
-                <img src="imagen/IMG-20251114-WA0026.jpg" data-title="Proyecto 06 — Residencial" class="lb">
+                <button class="m-btn" type="button" data-title="Proyecto 06 — Residencial" aria-label="Ampliar Proyecto 06 — Residencial">
+                    <img src="imagen/IMG-20251114-WA0026.jpg" alt="Proyecto 06 — Residencial" loading="lazy" decoding="async">
+                </button>
             </div>
 
             <div class="m-item">
-                <img src="imagen/IMG-20251114-WA0027.jpg" data-title="Proyecto 07 —Residencial" class="lb">
+                <button class="m-btn" type="button" data-title="Proyecto 07 — Residencial" aria-label="Ampliar Proyecto 07 — Residencial">
+                    <img src="imagen/IMG-20251114-WA0027.jpg" alt="Proyecto 07 — Residencial" loading="lazy" decoding="async">
+                </button>
             </div>
 
         </div>
     </div>
 </section>
 
-<!-- LIGHTBOX PREMIUM CORREGIDO -->
-<div id="lightbox" class="lightbox">
-    <img class="lightbox-img" src="">
-    <p class="lightbox-title"></p>
-    <span class="lightbox-close">×</span>
-</div>
-
 <!-- CONTACTO -->
 <section id="contacto" class="section alt fade-section">
     <div class="container contact-grid">
-        
+
         <div>
             <h2>Contacto</h2>
             <p class="section-sub">Te acompañamos en cada etapa.</p>
 
             <div class="contact-info">
                 <p><strong>Estudio:</strong> ZADA ARQUITECTOS</p>
-                <p><strong>RUC:</strong> 80161542-9</p> 
+                <p><strong>RUC:</strong> 80161542-9</p>
                 <p><strong>Email:</strong> <a href="mailto:zadaarquitectos@gmail.com">zadaarquitectos@gmail.com</a></p>
-                <p><strong>WhatsApp:</strong> <a href="https://wa.me/595985828588" target="_blank">+595 985 828 588</a></p>
-                <p><strong>Instagram:</strong> <a href="https://instagram.com" target="_blank">@zada.arquitectos</a></p>
+                <p><strong>WhatsApp:</strong> <a href="https://wa.me/595985828588" target="_blank" rel="noopener noreferrer">+595 985 828 588</a></p>
+                <p><strong>Instagram:</strong> <a href="https://instagram.com/zada.arquitectos" target="_blank" rel="noopener noreferrer">@zada.arquitectos</a></p>
             </div>
+
+            <a class="btn primary contact-cta" href="https://wa.me/595985828588?text=Hola%2C%20quisiera%20consultar%20por%20un%20proyecto" target="_blank" rel="noopener noreferrer">
+                Escribinos por WhatsApp
+            </a>
         </div>
 
     </div>
 </section>
 
+</main>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Galería de proyectos" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Cerrar">×</button>
+    <button class="lightbox-nav prev" type="button" aria-label="Proyecto anterior">‹</button>
+    <figure class="lightbox-figure">
+        <img class="lightbox-img" src="" alt="">
+        <figcaption class="lightbox-title"></figcaption>
+    </figure>
+    <button class="lightbox-nav next" type="button" aria-label="Proyecto siguiente">›</button>
+</div>
+
 <footer class="footer">
-    <p>© 2025 ZADA ARQUITECTOS - TODOS LOS DERECHOS RESERVADOS</p>
+    <p>© <span id="year">2026</span> ZADA ARQUITECTOS - TODOS LOS DERECHOS RESERVADOS</p>
 </footer>
 
-<script src="animations.js"></script>
+<script src="animations.js" defer></script>
 
 </body>
 </html>
